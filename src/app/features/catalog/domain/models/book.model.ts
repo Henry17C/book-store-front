@@ -11,8 +11,8 @@ export interface Money {
 }
 
 
-export interface CatalogBook {
-    id: string,
+export interface Book {
+    id: string;
     title: string;
     isbn:string;
     format:BookFormat;
@@ -24,6 +24,17 @@ export interface CatalogBook {
     inStock: boolean;
     
 }
+
+export interface CatalogBook {
+    id: string;
+    title: string;
+    coverUrl: string;
+    authorNames: string[];
+    price: Money;
+    averageRating: number;
+    inStock: boolean;
+}
+
 export interface RegisterBookPayload {
     title: string;
     isbn: string;
