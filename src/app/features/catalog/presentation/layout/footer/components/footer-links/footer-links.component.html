@@ -1,0 +1,40 @@
+<div class=" flex flex-col text-white  md:flex-row md:gap-10">
+  @for (section of sections; track section.title) {
+    <div class="mb-4 ">
+      <!-- Título -->
+      <button
+        class="w-full flex justify-between items-center font-bold text-lg md:cursor-default"
+        (click)="toggle(section)"
+      >
+        <h2>{{ section.title }}</h2>
+        <!-- El icono solo aparece en sm -->
+        <span class="sm:inline md:hidden pl-5">{{ section.open ? '-' : '+' }}</span>
+      </button>
+
+      <!-- Contenido en móvil: desplegable -->
+      @if (section.open) {
+        <ul class="flex flex-col gap-2 mt-2 transition-all duration-300 md:hidden">
+          @for (item of section.items; track item.label) {
+            <li>
+                
+              <a  class="hover:text-sky-400 transition-colors">
+                {{ item.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      }
+
+      <!-- Contenido en desktop: siempre visible -->
+      <ul class="hidden md:flex flex-col gap-2 mt-2">
+        @for (item of section.items; track item.label) {
+          <li>
+            <a  class="hover:text-sky-400 transition-colors">
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</div>
