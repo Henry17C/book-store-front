@@ -1,37 +1,60 @@
-<article class="flex flex-col border border-sky-700 rounded-xl p-5 bg-stone-100">
-  <div class="h-auto">
+<article class="flex flex-col border border-sky-500 rounded-xl p-5 bg-stone-100 h-full hover:border-sky-900">
+  <div class="w-full aspect-3/4 overflow-hidden rounded-md">
     <img
-      src="https://s3-media.mrbooks.com/mrbooks/portadas/9789501533439.webp"
-      alt="Book cover"
+      [src]="book.coverUrl"
+      [alt]="book.title"
       class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
     />
   </div>
   <div>
-    <h3 class="text-sm font-semibold text-gray-800 uppercase leading-5 h-[2-rem] line-clamp-2 mb-4">
-      Pequeño cerdo capitalista
+    <h3 class="pt-2 text-sm font-semibold text-gray-800 uppercase leading-5 h-[2-rem] line-clamp-2 mb-4">
+      {{ book.title }}
     </h3>
-    <p class="text-sky-900 uppercase">Pepe Aguilar</p>
-    <p class="text-sky-700">$12.50</p>
-    <p></p>
-    <p class="text-sky-700">En stock</p>
-    <button
-      class="bg-sky-700 text-sky-50 w-full rounded-xl flex items-center justify-center gap-2 p-1 hover:bg-sky-600 BOLD"
-    >
-      Comprar
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="h-6 w-6 font-bold"
+
+    <p class="text-sky-900 uppercase mb-2 line-clamp-1">
+      {{ book.authorNames.join(', ') }}
+    </p>
+
+    <div class="flex items-center gap-1 mb-2">
+      <span class="text-yellow-500 text-sm">★</span>
+      <span class="text-gray-600 text-xs font-semibold">{{
+        book.averageRating | number: '1.1-1'
+      }}</span>
+    </div>
+
+    <div class="mt-auto pt-2">
+      <p class="text-sky-700 font-bold text-lg">
+        {{ book.price.amount | currency: book.price.currency }}
+      </p>
+      <p></p>
+      @if (book.inStock) {
+        <p class="text-sky-700 text-sm mb-2">En stock</p>
+      } @else {
+        <p class="text-red-500 text-sm font-semibold mb-2">Agotado</p>
+      }
+
+      <button
+        class="bg-sky-700 text-sky-50 w-full rounded-xl flex items-center justify-center gap-1 p-2 hover:bg-sky-600 font-bold transition-colors"
+        [disabled]="!book.inStock"
+        [class.opacity-50]="!book.inStock"
+        [class.cursor-not-allowed]="!book.inStock"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        />
-      </svg>
-    </button>
+        Añadir al Carrito
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-6 w-6 font-bold"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      </button>
+    </div>
   </div>
 </article>
