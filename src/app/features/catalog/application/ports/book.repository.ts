@@ -11,6 +11,8 @@ export abstract class BookRepository {
     abstract getBookDetails(id: string): Observable<Book>;
     abstract getCatalogPage(page: number, size: number): Observable<Paginated<CatalogBook>>;
 
+    abstract getBooksByCategory(category: string, page: number, size: number): Observable<Paginated<CatalogBook>>;
+
     abstract registerBook(payload: RegisterBookPayload): Observable<void>;
     abstract updateBook(id: string, payload: UpdateBookPayload): Observable<void>;
 

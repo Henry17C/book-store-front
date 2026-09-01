@@ -51,6 +51,21 @@ export class BookHttpService implements BookRepository {
       .pipe(map((response) => BookMapper.toDomain(response)));
   }
 
+
+  getBooksByCategory(category: string, page: number, size: number): Observable<Paginated<CatalogBook>> {
+    
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+    
+    // Resultado: http://localhost:8080/books/category/NEW_RELEASES
+    const dynamicUrl = `${this.apiUrl}/category/${category}`;
+
+    return this.http.get<PageResponseDTO<CatalogBookResponseDTO>>(dynamicUrl, { params }).pipe(
+      map((response) => BookMapper.toPaginated(response, BookMapper.toCatalogBook))
+    );
+  }
+
   // --- ESCRITURAS ---
   registerBook(payload: RegisterBookPayload): Observable<void> {
     const requestDTO = BookMapper.toRegisterBookRequestDTO(payload);
