@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common'; // <-- Importamos esta utilidad
 import { BookCard } from '../book-card/book-card.component';
+import { CatalogBook } from '../../../domain/models/book.model';
 
 @Component({
   selector: 'app-book-carousel',
@@ -10,7 +11,9 @@ import { BookCard } from '../book-card/book-card.component';
 })
 export class BookCarouselComponent implements AfterViewInit, OnDestroy {
   @Input({ required: true }) title!: string;
-  mockItems = [1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13,14,15,16];
+
+  @Input({ required: true }) books: CatalogBook[] = []; 
+
 
   @ViewChild('carousel') carouselRef!: ElementRef<HTMLDivElement>;
   private autoPlayTimer: any;
@@ -19,19 +22,18 @@ export class BookCarouselComponent implements AfterViewInit, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
 
   ngAfterViewInit(): void {
-    // 2. Verificamos: ¿Estamos en el navegador del cliente?
+    // 2. Verificar si esta en el navegador del cliente
     if (isPlatformBrowser(this.platformId)) {
-      this.startAutoPlay(); // Solo arrancamos el motor aquí
+      this.startAutoPlay(); // arrancar el motor
     }
   }
 
   ngOnDestroy(): void {
-    // Es seguro llamar a esto, si no hay timer, no hace nada
     this.stopAutoPlay();
   }
 
   startAutoPlay(): void {
-    // Prevenimos que se creen múltiples intervalos por error
+    // Prevenir que se creen múltiples intervalos por error
     if (this.autoPlayTimer) return; 
     
     this.autoPlayTimer = setInterval(() => {
@@ -42,12 +44,12 @@ export class BookCarouselComponent implements AfterViewInit, OnDestroy {
   stopAutoPlay(): void {
     if (this.autoPlayTimer) {
       clearInterval(this.autoPlayTimer);
-      this.autoPlayTimer = null; // Limpiamos la referencia
+      this.autoPlayTimer = null; // Limpiar referencia
     }
   }
 
   private scrollToNext(): void {
-    // Doble validación de seguridad por si acaso
+    // Doble validación de seguridad
     if (!isPlatformBrowser(this.platformId) || !this.carouselRef) return;
 
     const container = this.carouselRef.nativeElement;
