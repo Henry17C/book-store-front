@@ -1,13 +1,23 @@
-<article class="flex flex-col border border-sky-500 rounded-xl p-5 bg-stone-100 h-full hover:border-sky-900">
-  <div class="w-full aspect-3/4 overflow-hidden rounded-md">
-    <img
-      [src]="book.coverUrl"
-      [alt]="book.title"
-      class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-    />
-  </div>
+<article
+  class="flex flex-col border border-sky-500 rounded-xl p-5 bg-stone-100 h-full hover:border-sky-900"
+>
+  <a
+    [routerLink]="['/libro', getSlug(book.title), book.isbn]"
+    class="cursor-pointer group flex-col flex grow"
+  >
+    <div class="w-full aspect-3/4 overflow-hidden rounded-md">
+      <img
+        [src]="book.coverUrl"
+        [alt]="book.title"
+        class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+      />
+    </div>
+  </a>
+
   <div>
-    <h3 class="pt-2 text-sm font-semibold text-gray-800 uppercase leading-5 h-[2-rem] line-clamp-2 mb-4">
+    <h3
+      class="pt-2 text-sm font-semibold text-gray-800 uppercase leading-5 h-[2-rem] line-clamp-2 mb-4"
+    >
       {{ book.title }}
     </h3>
 

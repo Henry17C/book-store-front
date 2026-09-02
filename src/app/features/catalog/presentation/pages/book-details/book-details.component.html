@@ -1,72 +1,86 @@
-<article class="flex flex-col md:flex-row w-full max-w-7xl mx-auto p-10 md:gap-10 md:p-20 lg:p-30">
-  <!-- CONTENEDOR IMAGEN:  -->
-  <div class="w-full md:w-1/3 flex justify-center">
-    <img
-      class="w-3/4 md:w-full max-w-sm border border-sky-700 p-5 rounded-xl object-contain"
-      src="https://s3-media.mrbooks.com/mrbooks/portadas/9788449331794.webp"
-      alt="Book cover"
-    />
-  </div>
-  <!-- CONTENEDOR DETALLES:  -->
-  <div class="flex flex-col w-full flex-1 gap-2">
-    <h1 class="font-bold uppercase text-center md:text-left text-2xl">
-      DESTROZA ESTE DIARIO. ROJO
-    </h1>
-    <span class="text-sky-500 font-semibold">Por Smith Keri</span>
-    <span class="text-sky-700 text-xl font-bold">$15.50</span>
-    <span class="font-semibold text-sm text-gray-600">⭐⭐⭐⭐⭐ 0 Reseña</span>
-    <span class="text-lg font-bold mt-4">Sinopsis</span>
-
-    <p class="w-full text-justify text-gray-700 leading-relaxed">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum voluptatibus atque quas ratione
-      facere laudantium facilis consequuntur maxime at aspernatur blanditiis perspiciatis impedit,
-      sequi culpa iste iusto quo, sunt laboriosam dolores ducimus deleniti debitis eos temporibus.
-      
-    </p>
-
-    <div class="flex flex-col justify-center p-0">
-      <span class="text-lg font-bold mt-4">Información del Producto</span>
-      <span>ISBN: 9788449331794</span>
-      <span>Disponibilidad: En stock</span>
+@if (book$ | async; as book) {
+  <article
+    class="flex flex-col md:flex-row w-full max-w-7xl mx-auto p-10 md:gap-10 md:p-20 lg:p-30"
+  >
+    <!-- CONTENEDOR IMAGEN:  -->
+    <div class="w-full md:w-1/3 flex justify-center">
+      <img
+        class="w-3/4 md:w-full max-w-sm border border-sky-700 p-5 rounded-xl object-contain"
+        [src]="book.coverUrl"
+        [alt]="book.title"
+      />
     </div>
+    <!-- CONTENEDOR DETALLES:  -->
+    <div class="flex flex-col w-full flex-1 gap-2">
+      <h1 class="font-bold uppercase text-center md:text-left text-2xl">
+        {{ book.title }}
+      </h1>
+      <span class="text-sky-500 font-semibold">{{ book.authorNames.join(', ') }}</span>
+      <span class="text-sky-700 text-xl font-bold">{{
+        book.price.amount | currency: book.price.currency
+      }}</span>
+      <span class="text-gray-600 font-semibold">⭐ {{
+        book.averageRating | number: '1.1-1'
+      }}</span>
+      <span class="text-lg font-bold mt-4">Sinopsis</span>
 
-    <!-- Controles de Compra -->
-    <div class="flex flex-col items-center justify-center gap-5 pt-5 mt-auto">
-      <!-- Botones de Cantidad -->
-      <div class="flex items-center gap-3 border border-gray-300 rounded-md px-3 py-1">
-        <button class="text-sky-700 hover:text-sky-900 transition-colors">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-          </svg>
-        </button>
-        <span class="font-bold w-4 text-center">1</span>
-        <button class="text-sky-700 hover:text-sky-900 transition-colors">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-        </button>
+      <p class="w-full text-justify text-gray-700 leading-relaxed">
+        {{ book.description }}
+      </p>
+
+      <div class="flex flex-col justify-center p-0">
+        <span class="text-lg font-bold mt-4">Información del Producto</span>
+        <span>ISBN: {{ book.isbn }}</span>
+        @if (book.inStock) {
+          <span class="text-green-500">En stock</span>
+        } @else {
+          <span class="text-red-500">Agotado</span>
+        }
       </div>
 
-      <!-- Añadir al Carrito -->
-      <button
-        class="bg-sky-700 text-white px-6 py-2 rounded-md font-semibold hover:bg-sky-800 transition-colors inline-flex items-center gap-2"
-      >
-        Añadir al Carrito
-      </button>
+      <!-- Controles de Compra -->
+      <div class="flex flex-col items-center justify-center gap-5 pt-5 mt-auto">
+        <!-- Botones de Cantidad -->
+        <div class="flex items-center gap-3 border border-gray-300 rounded-md px-3 py-1">
+          <button class="text-sky-700 hover:text-sky-900 transition-colors">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+            </svg>
+          </button>
+          <span class="font-bold w-4 text-center">1</span>
+          <button class="text-sky-700 hover:text-sky-900 transition-colors">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Añadir al Carrito -->
+        <button
+          class="bg-sky-700 text-white px-6 py-2 rounded-md font-semibold hover:bg-sky-800 transition-colors inline-flex items-center gap-2"
+        >
+          Añadir al Carrito
+        </button>
+      </div>
     </div>
+  </article>
+} @else {
+  <!-- Skeleton Loader-->
+  <div class="w-full max-w-7xl mx-auto p-10 flex justify-center">
+    <p class="text-sky-700 font-bold animate-pulse">Cargando libro...</p>
   </div>
-</article>
+}

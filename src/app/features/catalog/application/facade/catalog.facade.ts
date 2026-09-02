@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { CatalogBook } from '../../domain/models/book.model';
+import { Book, CatalogBook } from '../../domain/models/book.model';
 import { BookRepository } from '../ports/book.repository';
 @Injectable({
   providedIn: 'root',
@@ -27,4 +27,10 @@ export class CatalogFacade {
       .getBooksByCategory('RECOMMENDED', 0, 10)
       .pipe(map((paginated) => paginated.items));
   }
+
+  getBookDetailsByIsbn(isbn: string): Observable<Book>{
+    return this.bookRepository.getBookDetailsByIsbn(isbn)
+  }
+
+
 }

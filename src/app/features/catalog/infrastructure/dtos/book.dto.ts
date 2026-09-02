@@ -52,6 +52,7 @@ export interface CatalogBookResponseDTO {
   price: MoneyResponse;
   averageRating: number;
   inStock: boolean;
+  isbn:string
 }
 
 export interface PageResponseDTO<T> {

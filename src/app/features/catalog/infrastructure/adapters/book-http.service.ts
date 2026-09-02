@@ -51,6 +51,11 @@ export class BookHttpService implements BookRepository {
       .pipe(map((response) => BookMapper.toDomain(response)));
   }
 
+  getBookDetailsByIsbn(isbn: string): Observable<Book>{
+    return this.http.get<BookDetailsResponseDTO>(`${this.apiUrl}/isbn/${isbn}`)
+    .pipe(map((response) => BookMapper.toDomain(response)));
+  }
+
 
   getBooksByCategory(category: string, page: number, size: number): Observable<Paginated<CatalogBook>> {
     

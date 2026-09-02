@@ -46,6 +46,7 @@ static toCatalogBook(dto: CatalogBookResponseDTO): CatalogBook {
       },
       averageRating: dto.averageRating,
       inStock: dto.inStock,
+      isbn: dto.isbn
     };
   }
 

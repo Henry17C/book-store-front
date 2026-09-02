@@ -33,6 +33,7 @@ export interface CatalogBook {
     price: Money;
     averageRating: number;
     inStock: boolean;
+    isbn:string
 }
 
 export interface RegisterBookPayload {

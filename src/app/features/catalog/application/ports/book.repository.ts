@@ -9,6 +9,9 @@ import { Paginated } from '../../domain/models/paginated.model';
 
 export abstract class BookRepository {
     abstract getBookDetails(id: string): Observable<Book>;
+    
+    abstract  getBookDetailsByIsbn (isbn: string ):Observable<Book>;
+
     abstract getCatalogPage(page: number, size: number): Observable<Paginated<CatalogBook>>;
 
     abstract getBooksByCategory(category: string, page: number, size: number): Observable<Paginated<CatalogBook>>;
@@ -24,4 +27,6 @@ export abstract class BookRepository {
     abstract unarchiveBook(id: string): Observable<void>;
     abstract archiveBook(id: string): Observable<void>;
     abstract recommendBook(id: string): Observable<void>;
+
+    
 }

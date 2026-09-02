@@ -18,7 +18,7 @@ export class BookCarouselComponent implements AfterViewInit, OnDestroy {
   @ViewChild('carousel') carouselRef!: ElementRef<HTMLDivElement>;
   private autoPlayTimer: any;
   
-  // 1. Inyectamos el ID de la plataforma actual
+  // 1. Inyectar el ID de la plataforma actual
   private readonly platformId = inject(PLATFORM_ID);
 
   ngAfterViewInit(): void {
