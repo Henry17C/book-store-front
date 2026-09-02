@@ -19,9 +19,9 @@
       <span class="text-sky-700 text-xl font-bold">{{
         book.price.amount | currency: book.price.currency
       }}</span>
-      <span class="text-gray-600 font-semibold">⭐ {{
-        book.averageRating | number: '1.1-1'
-      }}</span>
+      
+      <app-star-rating [rating]="book.averageRating" />
+
       <span class="text-lg font-bold mt-4">Sinopsis</span>
 
       <p class="w-full text-justify text-gray-700 leading-relaxed">

@@ -4,10 +4,10 @@ import { Observable, switchMap } from 'rxjs';
 import { CatalogFacade } from '../../../application/facade/catalog.facade';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, AsyncPipe, CurrencyPipe, DecimalPipe } from '@angular/common';
-
+import { StarRating } from '../../components/star-rating/star-rating.component';
 @Component({
   selector: 'app-book-details',
-  imports: [CommonModule, AsyncPipe, CurrencyPipe, DecimalPipe],
+  imports: [CommonModule, AsyncPipe, CurrencyPipe, DecimalPipe, StarRating],
   templateUrl: './book-details.component.html',
 
 })

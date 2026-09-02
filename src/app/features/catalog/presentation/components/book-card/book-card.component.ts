@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Book, CatalogBook } from '../../../domain/models/book.model';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router'; 
+import { StarRating } from '../star-rating/star-rating.component';
 @Component({
   selector: 'app-book-card',
-  imports: [CurrencyPipe, DecimalPipe,RouterLink],
+  imports: [CurrencyPipe,RouterLink, StarRating],
   templateUrl: './book-card.component.html',
   styles: ``,
 })
