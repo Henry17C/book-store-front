@@ -1,0 +1,58 @@
+@if (data$ | async; as data) {
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-8 min-h-screen">
+    <div class="mb-8 border-b border-gray-200 pb-4">
+      <nav class="text-xs text-gray-500 mb-2 flex items-center gap-1">
+        <a routerLink="/" class="hover:text-sky-700 transition-colors">Inicio</a>
+        <span>/</span>
+        <span class="text-gray-800 font-semibold">{{ data.categoryTitle }}</span>
+      </nav>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <h1 class="text-3xl font-bold text-gray-800">{{ data.categoryTitle }}</h1>
+        <p class="text-sm text-gray-500">
+          Total de libros:
+          <span class="font-bold text-sky-800">{{ data.paginated.totalElements }}</span>
+        </p>
+      </div>
+    </div>
+
+    @if (data.paginated.items.length > 0) {
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        @for (book of data.paginated.items; track book.id) {
+          <app-book-card [book]="book" />
+        }
+      </div>
+
+      <div class="flex items-center justify-between border-t border-gray-200 px-4 py-6 mt-10">
+        <button
+          (click)="changePage(data.categoryKey, data.paginated.currentPage - 1)"
+          [disabled]="data.paginated.currentPage === 0"
+          class="px-4 py-2 border border-sky-700 text-sky-700 rounded-md font-semibold hover:bg-sky-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        >
+          Anterior
+        </button>
+
+        <span class="text-sm text-gray-700 font-medium">
+          Página <span class="font-bold">{{ data.paginated.currentPage + 1 }}</span> de
+          {{ data.paginated.totalPages }}
+        </span>
+
+        <button
+          (click)="changePage(data.categoryKey, data.paginated.currentPage + 1)"
+          [disabled]="data.paginated.currentPage + 1 >= data.paginated.totalPages"
+          class="px-4 py-2 bg-sky-700 text-white rounded-md font-semibold hover:bg-sky-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        >
+          Siguiente
+        </button>
+      </div>
+    } @else {
+      <div class="text-center py-16 bg-stone-50 rounded-xl border border-gray-200">
+        <p class="text-gray-600 text-lg">No se encontraron libros disponibles en esta categoría.</p>
+      </div>
+    }
+  </section>
+} @else {
+  <div class="max-w-7xl mx-auto px-4 md:px-8 py-20 text-center">
+    <p class="text-sky-700 font-bold animate-pulse text-lg">Cargando catálogo...</p>
+  </div>
+}
