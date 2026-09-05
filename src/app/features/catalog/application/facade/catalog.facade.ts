@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Book, CatalogBook } from '../../domain/models/book.model';
 import { BookRepository } from '../ports/book.repository';
+import { Paginated } from '../../domain/models/paginated.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,9 +29,20 @@ export class CatalogFacade {
       .pipe(map((paginated) => paginated.items));
   }
 
-  getBookDetailsByIsbn(isbn: string): Observable<Book>{
-    return this.bookRepository.getBookDetailsByIsbn(isbn)
+  getBookDetailsByIsbn(isbn: string): Observable<Book> {
+    return this.bookRepository.getBookDetailsByIsbn(isbn);
   }
 
+  getBooksByCategory(
+    category: string,
+    page: number,
+    size: number,
+  ): Observable<Paginated<CatalogBook>> {
+    return this.bookRepository.getBooksByCategory(category, page, size);
+  }
 
+  searchBooks(query: string): Observable<CatalogBook[]> {
+    return this.bookRepository.searchBooks(query, 0,10, true).
+    pipe(map((paginated) => paginated.items));
+  }
 }

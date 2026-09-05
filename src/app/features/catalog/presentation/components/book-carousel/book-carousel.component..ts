@@ -1,17 +1,17 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common'; // <-- Importamos esta utilidad
+import { isPlatformBrowser } from '@angular/common';
 import { BookCard } from '../book-card/book-card.component';
 import { CatalogBook } from '../../../domain/models/book.model';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-book-carousel',
   standalone: true,
-  imports: [BookCard],
+  imports: [BookCard, RouterLink],
   templateUrl: './book-carousel.component.html'
 })
 export class BookCarouselComponent implements AfterViewInit, OnDestroy {
   @Input({ required: true }) title!: string;
-
+  @Input({ required: true }) categoryId!: string; // Recibe el identificador (ejm: 'NEW_RELEASES')
   @Input({ required: true }) books: CatalogBook[] = []; 
 
 

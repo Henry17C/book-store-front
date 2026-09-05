@@ -7,7 +7,7 @@ import { CommonModule, AsyncPipe, CurrencyPipe, DecimalPipe } from '@angular/com
 import { StarRating } from '../../components/star-rating/star-rating.component';
 @Component({
   selector: 'app-book-details',
-  imports: [CommonModule, AsyncPipe, CurrencyPipe, DecimalPipe, StarRating],
+  imports: [CommonModule, AsyncPipe, CurrencyPipe, StarRating],
   templateUrl: './book-details.component.html',
 
 })
