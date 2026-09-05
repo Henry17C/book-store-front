@@ -37,7 +37,11 @@
     <!-- Cuadricula de Resultados (Derecha) -->
     <main class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-6">
       @if (isLoading) {
-        <p class="text-sky-700 animate-pulse col-span-full">Buscando libros...</p>
+        <!-- Pantalla de carga mientras espera al backend -->
+        <div class="flex items-center justify-center min-h-[70vh] ">
+          <app-loader text="Buscando libros..."></app-loader>
+        </div>
+        <
       } @else {
         @for (book of searchResults; track book.id) {
           <!-- Emitir closeModal para que desaparezca la pantalla -->

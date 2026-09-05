@@ -52,7 +52,8 @@
     }
   </section>
 } @else {
-  <div class="max-w-7xl mx-auto px-4 md:px-8 py-20 text-center">
-    <p class="text-sky-700 font-bold animate-pulse text-lg">Cargando catálogo...</p>
-  </div>
+  <!-- Pantalla de carga mientras espera al backend -->
+      <div class="flex items-center justify-center min-h-[70vh]">
+        <app-loader text="Cargando..."></app-loader>
+      </div>
 }

@@ -5,11 +5,12 @@ import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs';
 import { BookCard } from '../book-card/book-card.component';
 import { CatalogBook } from '../../../domain/models/book.model';
 import { CatalogFacade } from '../../../application/facade/catalog.facade';
+import { LoaderComponent } from "../../../../../shared/components/loader/loader/loader.component";
 
 @Component({
   standalone: true,
   selector: 'app-catalog-search-modal',
-  imports: [BookCard, ReactiveFormsModule],
+  imports: [BookCard, ReactiveFormsModule, LoaderComponent],
   templateUrl: './catalog-search-modal.component.html',
   styles: ``,
 })

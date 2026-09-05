@@ -6,9 +6,10 @@ import { BookCard } from '../../components/book-card/book-card.component';
 import { CatalogFacade } from '../../../application/facade/catalog.facade';
 import { Paginated } from '../../../domain/models/paginated.model';
 import { CatalogBook } from '../../../domain/models/book.model';
+import { LoaderComponent } from '../../../../../shared/components/loader/loader/loader.component';
 @Component({
   selector: 'app-category-page',
-  imports: [CommonModule, AsyncPipe, BookCard, RouterLink],
+  imports: [CommonModule, AsyncPipe, BookCard, RouterLink, LoaderComponent],
   templateUrl: './category-page.component.html',
 
 })

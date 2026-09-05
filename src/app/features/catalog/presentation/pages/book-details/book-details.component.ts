@@ -5,9 +5,10 @@ import { CatalogFacade } from '../../../application/facade/catalog.facade';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, AsyncPipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { StarRating } from '../../components/star-rating/star-rating.component';
+import { LoaderComponent } from '../../../../../shared/components/loader/loader/loader.component';
 @Component({
   selector: 'app-book-details',
-  imports: [CommonModule, AsyncPipe, CurrencyPipe, StarRating],
+  imports: [CommonModule, AsyncPipe, CurrencyPipe, StarRating, LoaderComponent],
   templateUrl: './book-details.component.html',
 
 })
