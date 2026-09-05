@@ -19,7 +19,9 @@
     </a>
 
 
-    <a class="flex flex-col justify-center items-center p-2">
+    <a class="flex flex-col justify-center items-center p-2"
+    (click)="isSearchOpen=true"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -35,8 +37,6 @@
 
       <span class="text-olive-50 font-semibold">Buscar</span>
     </a>
-
-
 
     <a class="flex flex-col justify-center items-center p-2">
       <svg
@@ -79,3 +79,9 @@
     </a>
   </div>
 </nav>
+
+
+<!-- EL MODAL VA FUERA DEL CONTENEDOR FLEX -->
+@if (isSearchOpen) {
+  <app-catalog-search-modal (closeModal)="isSearchOpen = false" />
+}

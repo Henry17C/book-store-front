@@ -1,0 +1,49 @@
+<div
+  class="fixed inset-0 z-50 bg-white/95 backdrop-blur-sm overflow-y-auto p-4 md:p-10 flex flex-col"
+>
+  <!-- BARRA SUPERIOR: Buscador y Botón Cerrar (X) -->
+  <div class="flex items-center gap-4 max-w-5xl mx-auto w-full">
+    <div class="relative flex-1">
+      <input
+        #searchInput
+        type="text"
+        [formControl]="searchControl"
+        placeholder="Buscar por título, autor o ISBN..."
+        class="w-full text-xl md:text-3xl bg-transparent border-b-2 border-sky-700 py-3 outline-none focus:border-sky-500 transition-colors"
+      />
+    </div>
+
+    <!-- Botón X para cerrar -->
+    <button (click)="closeModal.emit()" class="text-gray-500 hover:text-red-500 p-2">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- ZONA DE RESULTADOS Y FILTROS -->
+  <div class="flex flex-col md:flex-row max-w-5xl mx-auto w-full mt-10 gap-8">
+    <!-- Filtros Rapidos (Izquierda) -->
+    <aside class="w-full md:w-64 flex flex-col gap-4">
+      <h3 class="font-bold text-gray-800 uppercase">Filtros</h3>
+      <!-- Checks de formato, categoría, etc. -->
+    </aside>
+
+    <!-- Cuadricula de Resultados (Derecha) -->
+    <main class="flex-1 grid grid-cols-2 md:grid-cols-3 gap-6">
+      @if (isLoading) {
+        <p class="text-sky-700 animate-pulse col-span-full">Buscando libros...</p>
+      } @else {
+        @for (book of searchResults; track book.id) {
+          <!-- Emitir closeModal para que desaparezca la pantalla -->
+          <app-book-card [book]="book" (click)="closeModal.emit()" />
+        }
+      }
+    </main>
+  </div>
+</div>
